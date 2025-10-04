@@ -9,7 +9,11 @@ $movie = new Movie();
 $movie->name = 'Vingadores';
 $movie->type = 'Ação';
 $movie->age = 2025;
-$movie->note = 5;
+
+// Avaliações
+$movie->calculateEvaluation(5);
+$movie->calculateEvaluation(4);
+$movie->calculateEvaluation(3);
 
 var_dump($movie);
 
@@ -25,3 +29,4 @@ $movie->name = 'Vingadores 2';
 $movie2->name = 'X men';
 
 var_dump($movie2);
+echo 'A média do filme é: ' . $movie->getValue() . PHP_EOL;

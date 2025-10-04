@@ -10,5 +10,15 @@ class Movie
 
     public int $age;
 
-    public string $note;
+    private array $notes = [];
+
+    public function calculateEvaluation(float $nota): void
+    {
+        $this->notes[] = $nota;
+    }
+
+    public function getValue(): float
+    {
+        return array_sum($this->notes) / count($this->notes);
+    }
 }
