@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
+use app\Models\Type;
+
 class Movie
 {
+    private static int $view = 0;
+    
+    // Só funciona a partir do PHP 8.3 - tipagem int do exemplo
+    private const int MEDIA = 4;
+    
     private array $notes;
 
     public function __construct(
-        private string $name,
-        private string $type,
-        private int $age,
+        public readonly string $name,
+        private readonly Type $type,
+        private readonly int $age,
     )
     {
         $this->notes = [];
@@ -25,11 +32,6 @@ class Movie
         return array_sum($this->notes) / count($this->notes);
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
     public function getType(): string
     {
         return $this->type;
@@ -38,5 +40,22 @@ class Movie
     public function getAge(): int
     {
         return $this->age;
+    }
+
+    public function getQuality(): string
+    {
+        $value = $this->getValue();
+
+        return $value <= self::MEDIA ? 'Não é recomendado' : 'É recomendado';
+    }
+
+    public function addView(): void
+    {
+        self::$view++;
+    }
+
+    public function getViews(): int
+    {
+        return self::$view;
     }
 }
