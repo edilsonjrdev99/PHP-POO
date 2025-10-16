@@ -107,3 +107,70 @@ $new->inclement(); // $media = 6;
 $old->getMedia(); // Aprovado
 $new->getMedia(); // Aprovado
 ```
+
+9. Usando modificador de acesso protected: Ele permite que as classes filhas possam acessar o atributo, porém somente dentro da classe pai e filha.
+10. Encapsulamento: Classe service foi usada para encapsular uma responsabilidade específica, como o cálculo da duração dos filmes
+
+```php
+<?php
+
+namespace App\Services;
+
+use App\Models\Movie;
+
+class CalculationMoviesDuration {
+    private $duration = 0;
+    private $moviesNames = '';
+
+    public function getDurationMovies(Movie ...$movies)
+    {
+        foreach($movies as $key => $movie) {
+            if ($movie instanceof Movie) {
+                $this->duration += $movie->getDuration();
+                $addVirgula = $key < (count($movies) - 1) ? ', ' : '';
+                $this->moviesNames .=$movie->name . $addVirgula;
+            }
+
+        }
+
+        return 'Duração em minutos de ' . $this->moviesNames . ' - ' . $this->duration;
+    }
+}
+```
+
+11. Interface: Define que a classe que implementará ela deve ter os atributos e métodos que a classe possui obrigatóriamente, isso é interessante em usar quando queremos padronizar recursos padrões para algo, como várias classes que manipulam pagamento, mas devem ter obrigatóriamente tais propriedades e métodos.
+12. Herança: Quando temos uma classe padrão que será herdada por uma classe filha, como por exemplo a classe animal que possui atributos que todos os animais possuem em comum, então todas as classes de animais específicos vão herdar essa classe.
+13. Polimorfismo: Quando temos várias classes específicas que herdam uma classe padrão, o polimorfismo garante que mesmo as classes herdando uma classe padrão elas respondem diferente:
+```php
+<?php
+
+class Animal {
+    public function fazerSom(): string
+    {
+        return 'Algum som';
+    }
+}
+
+class Cachorro extends Animal {
+    public function fazerSom(): string
+    {
+        return 'Au au';
+    }
+}
+
+class Lobo extends Animal {
+    public function fazerSom(): string
+    {
+        return 'Aur auuur';
+    }
+}
+
+$animais = [new Cachorro, new Lobo];
+
+// Retorna
+// Au au
+// Aur auuur
+foreach($animais as $animal) {
+    echo $animal->fazerSom();
+}
+```
