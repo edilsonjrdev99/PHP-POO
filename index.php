@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Models\Movie;
 use App\Models\Type;
+use App\Services\CalculationMoviesDuration;
 
 // Novo valor na memória
 $movie = new Movie('Vingadores', Type::Acao, 2025);
@@ -40,4 +41,12 @@ $movie->addView();
 $movie2->addView();
 $movie3->addView();
 
-echo 'Quantas vezes os filmes dos vingadores foram assistido? ' . $movie->getViews() . PHP_EOL;
+$movie->addDurations(18);
+$movie3->addDurations(10);
+
+echo "Quantas vezes os filmes dos $movie->name foi assistido? " . $movie->getViews() . PHP_EOL;
+
+$durationMovies = new CalculationMoviesDuration();
+
+echo $durationMovies->getDurationMovies($movie, $movie3) . PHP_EOL;
+

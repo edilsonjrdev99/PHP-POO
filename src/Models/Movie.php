@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use app\Models\Type;
+use App\Models\Type;
+use App\Models\Titles;
 
-class Movie
+class Movie extends Titles
 {
     private static int $view = 0;
     
@@ -57,5 +58,10 @@ class Movie
     public function getViews(): int
     {
         return self::$view;
+    }
+
+    public function getDuration(): int
+    {
+        return $this->duration;
     }
 }
