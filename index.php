@@ -2,6 +2,8 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use App\Models\ConvertNotesByStars;
+use App\Models\Episode;
 use App\Models\Movie;
 use App\Models\Type;
 use App\Services\CalculationMoviesDuration;
@@ -50,3 +52,10 @@ $durationMovies = new CalculationMoviesDuration();
 
 echo $durationMovies->getDurationMovies($movie, $movie3) . PHP_EOL;
 
+$episode = new Episode("Episódio 1", "Descrição do episódio", 1);
+$movie->addEpisode($episode);
+$availableConverted = new ConvertNotesByStars()->convert($movie);
+
+echo "Conversão $availableConverted";
+
+var_dump($movie);

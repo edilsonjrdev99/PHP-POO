@@ -174,3 +174,11 @@ foreach($animais as $animal) {
     echo $animal->fazerSom();
 }
 ```
+
+14. Abstratas: Classes abstratas são herdadas por class concretas e geralmente são usadas para indicar um objeto genérico. As classes abstratas podem forçar a classe filha a implementar funções usando `abstract public function addValue(int $value): void`. Essas classes não podem ser `instanciadas`.
+
+15. Problema diamante (Diamond problem): O problema diamante é quando estendemos múltiplas classes, em linguagem de mais alto nível igual ao PHP isso não é permitido! O problema ocorre quando, por exemplo temos uma classe abstrata `Title`que possui uma função `addDuration()` e duas classes `Movie` e `Serie` herdam essa classe e sobescreve essa função, quando uma nova classe herdar essas duas classes qual função ele vai usar? É aí que está o problema e o nome vem dessa semelhança a diagrama de classe parecido com um diamante.
+
+16. Traits: Traits são utilizadas quando classes possuem códigos iguais, ela não é uma instância é como se copiássemos o código da Trais para a classe, para criarmos ela usamos a palavra `trait Trait {}` e usamos `use Trais;`
+
+17. Namespaces: Podemos usar `use Namespace\Class;` ou `function getName(\Namespace\Class) {}` e para usarmos apelidos podemos usar `use Namespace\Class as Apelido;`

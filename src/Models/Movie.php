@@ -2,30 +2,29 @@
 
 namespace App\Models;
 
+use App\Interfaces\AvailableInterface;
 use App\Models\Type;
 use App\Models\Titles;
+use App\Traits\AvailableTrait;
 
-class Movie extends Titles
+class Movie extends Titles implements AvailableInterface
 {
+    use AvailableTrait;
+
     private static int $view = 0;
     
     // Só funciona a partir do PHP 8.3 - tipagem int do exemplo
     private const int MEDIA = 4;
-    
-    private array $notes;
 
-    public function __construct(
+    private array $episodes;
+
+    public function __construct( 
         public readonly string $name,
         private readonly Type $type,
         private readonly int $age,
     )
     {
         $this->notes = [];
-    }
-
-    public function calculateEvaluation(float $nota): void
-    {
-        $this->notes[] = $nota;
     }
 
     public function getValue(): float
@@ -63,5 +62,30 @@ class Movie extends Titles
     public function getDuration(): int
     {
         return $this->duration;
+    }
+
+    public function addDurations(int $duration): void
+    {
+        $this->duration = $duration;
+    }
+
+    public function addEpisode(Episode $episode): void
+    {
+        $this->episodes[] = $episode;
+    }
+
+    public function getEpisodes(): array
+    {
+        return $this->episodes;
+    }
+
+    public function getMediaNotes(): float
+    {
+        return array_sum($this->notes) / $this->getQuantityNotes();
+    }
+
+    public function getQuantityNotes(): int
+    {
+        return count($this->notes);
     }
 }

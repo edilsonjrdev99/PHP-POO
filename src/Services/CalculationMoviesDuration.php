@@ -19,6 +19,6 @@ class CalculationMoviesDuration {
 
         }
 
-        return 'Duração em minutos de ' . $this->moviesNames . ' - ' . $this->duration;
+        return 'Duração em minutos de ' . $this->moviesNames . ': ' . $this->duration;
     }
 }
